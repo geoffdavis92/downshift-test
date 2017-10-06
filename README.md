@@ -1,5 +1,5 @@
-# Downshift Tests
+# Downshift Issue #217
 
-*This is simply a test repo for me to conduct [Downshift](https://github.com/paypal/downshift) tests in a central location*
+**Issue:** Cursor jumps to end of input when inputValue is a controlled prop [[link]](https://github.com/paypal/downshift/issues/217)
 
-All test projects are in branches organized by Downshift Github Issue #, or personal test branches.
+**Solution:** Move "controlled" input state into it's own class so it does not override user input, on input. This local input state can bubble up to parent component(s) in order to be used/saved at higher levels if need be.
