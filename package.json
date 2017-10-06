@@ -19,7 +19,7 @@
     "prettier": "./node_modules/.bin/prettier src/*js --write"
   },
   "prettier": {
-    "useTabs": true,
+    "useTabs": false,
     "tabWidth": 2
   }
 }
