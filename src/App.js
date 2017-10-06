@@ -29,12 +29,21 @@ function getCaretPosition(oField) {
   return iCaretPos;
 }
 
+// Input is in its own class now
 class InputWithLocalState extends Component {
   constructor(props) {
     super(props);
+    // set initial state like in <App/>
     this.state = { value: "" };
+    // Bind updateLocalState method
     this.updateLocalState = this.updateLocalState.bind(this);
   }
+  /**
+   * Sets state of this input component, and safely sends
+   *   current state to the updateParentState callback,
+   *   if available.
+   * @return {void} 
+   */
   updateLocalState() {
     this.setState(
       prevState => ({ value: this.input.value }),
@@ -45,7 +54,20 @@ class InputWithLocalState extends Component {
     );
   }
   render() {
+    /* 
+     * destructure innerRef and updateParentState props before spreading
+     *  the rest of the props (including Downshift-passed props)
+     */
     const { innerRef, updateParentState, ...restOfProps } = this.props;
+    /* 
+     * innerRef = allows instances to pass the correct HTMLNode ref up
+     * 
+     * updateParentState = callback prop to pass state up; *this is 
+     *  only destructured because it's not a valid HTML attribute,
+     *  and ...restOfProps– which is needed for passing in Downshift
+     *  props– would add that to the DOM automatically.
+     */
+
     return (
       <input
         {...restOfProps}
